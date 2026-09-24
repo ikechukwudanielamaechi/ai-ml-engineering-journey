@@ -7,7 +7,7 @@ A daily, disciplined record of my transition into AI/ML engineering — built al
 
 Computer Engineering graduate with a background in software engineering (C#, ASP.NET, JavaScript, REST APIs) and four years of professional data/document work. Currently deepening AI/ML fundamentals through daily research, Python practice and a real long-term project rather than isolated tutorials.
 
-- LinkedIn: [linkedin.com/in/bigike](https://linkedin.com/in/bigike)
+- LinkedIn: [linkedin.com/in/bigike](https://linkedin.com/in/IkechukwuDanielAmaechi)
 
 ## What's in this repo
 
