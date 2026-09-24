@@ -25,8 +25,8 @@ Reserved for NumPy/Pandas/Kaggle work, starting once I complete CS50P.
 | Skill | Status |
 |---|---|
 | ML fundamentals (evaluation, metrics, data quality, splitting, reproducibility) | ✅ Strong conceptual foundation |
-| Python (CS50P) | 🟡 Week 7 |
-| NumPy / Pandas | ⬜ Upcoming |
+| Python (CS50P) | 🟢 Completed |
+| NumPy / Pandas | 🟡 Ongoing |
 | Git/GitHub | 🟡 In progress (this repo) |
 | Classical ML implementation | ⬜ Month 3 of roadmap |
 | Computer vision (MediaPipe, CNNs) | ⬜ Month 5 |
@@ -39,4 +39,4 @@ Most of my early work has focused less on rushing into libraries and more on bui
 
 ## Contact
 
-Feel free to connect or reach out via [LinkedIn](https://linkedin.com/in/bigike).
+Feel free to connect or reach out via [LinkedIn](https://linkedin.com/in/Ikechukwudanielamaechi).
