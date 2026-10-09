@@ -38,4 +38,5 @@ Most of my early work has focused less on rushing into libraries and more on bui
 
 ## Contact
 
-Feel free to connect or reach out via [LinkedIn](https://linkedin.com/in/Ikechukwudanielamaechi).
+Feel free to connect or reach out via [LinkedIn](https://linkedin.com/in/Ikechukwudanielamaechi)....
+
