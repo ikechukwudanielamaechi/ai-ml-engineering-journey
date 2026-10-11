@@ -1,0 +1,104 @@
+#29th September 2026
+
+🐍 CS50P-Level Python Practice
+We’re keeping this within your current demonstrated level.
+Use:
+import pandas as pd
+
+videos = pd.DataFrame({
+    "video_id": [
+        "V01", "V02", "V03", "V04", "V05",
+        "V06", "V07", "V08", "V09", "V10"
+    ],
+    "sign": [
+        "HELLO", "HELLO", "HELLO", "HELP", "HELP",
+        "HELP", "YES", "YES", "NO", "NO"
+    ],
+    "signer_id": [
+        "S01", "S01", "S02", "S01", "S02",
+        "S03", "S02", "S03", "S03", "S03"
+    ]
+})
+
+metadata = pd.DataFrame({
+    "video_id": [
+        "V01", "V02", "V03", "V04", "V05",
+        "V06", "V07", "V08", "V09"
+    ],
+    "environment": [
+        "indoor", "indoor", "outdoor", "outdoor", "outdoor",
+        "outdoor", "indoor", "indoor", "indoor"
+    ],
+    "quality_score": [5, 4, 5, 2, 3, 2, 5, 4, 5]
+})
+
+Task 1 — Inner merge
+Create:
+merged_inner
+using an inner merge on video_id.
+Then determine:
+number of rows
+which video is missing
+why it is missing from the result
+
+Task 2 — Left merge
+Create:
+merged_left
+using a left merge.
+Then inspect V10.
+What values does it have for:
+environment
+quality_score
+
+Task 3 — Detect the missing metadata
+Use your merged DataFrame to identify the row where metadata is missing.
+Don’t manually type "V10" into your filtering condition.
+Use the DataFrame itself to identify the missing information.
+
+Task 4 — Research summary
+Using your merged dataset, answer:
+How many videos have environment information?
+How many videos have missing quality information?
+Which sign does the missing video belong to?
+Which signer contributed that video?
+
+Task 5 — Assertions
+Write at least four meaningful assertions.
+At least one should test something about the merge.
+For example, you might test the expected number of rows, but choose the actual assertions yourself.
+
+PYTHON CODE ANSWER
+Task 1 — Inner Merge
+  * merged_inner Code:
+    merged_inner = pd.merge(videos, metadata, on="video_id", how="inner")
+ * Number of rows: 9
+  * Which video is missing: V10
+  * Why it is missing: An inner merge keeps only records where the video_id key is present in both DataFrames. Since V10 exists in videos but is absent from metadata, Pandas drops it.
+ Task 2 — Left Merge
+  * merged_left Code:
+    merged_left = pd.merge(videos, metadata, on="video_id", how="left")
+ * Inspection of V10:
+    * environment: NaN (or None/NaN missing value)
+    * quality_score: NaN
+ Task 3 — Detect the Missing Metadata
+  * Filtering Code:
+    missing_metadata = merged_left[merged_left["environment"].isna()]
+Task 4 — Research Summary
+  * How many videos have environment information?
+    9 videos (merged_left["environment"].count())
+  * How many videos have missing quality information?
+    1 video (merged_left["quality_score"].isna().sum())
+  * Which sign does the missing video belong to?
+    NO
+  * Which signer contributed that video?
+    S03
+ Task 5 — Assertions
+ # 1. Test that the left merge preserved all primary rows (video counts)
+ assert len(merged_left) == len(videos), "Left merge must retain all primary video rows"
+# 2. Test that exactly one video has missing metadata after the left merge
+ assert merged_left["environment"].isna().sum() == 1, "Expected exactly 1 row with missing metadata"
+# 3. Test that no duplicate video_ids were created during the merge
+ assert merged_left["video_id"].is_unique, "Merged DataFrame should not contain duplicate video_ids"
+# 4. Test that all non-null quality scores are within the valid range (1 to 5)
+ assert merged_left["quality_score"].dropna().between(1, 5).all(), "Quality scores must be between 1 and 5"
+

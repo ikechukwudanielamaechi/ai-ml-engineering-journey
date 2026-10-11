@@ -1,0 +1,110 @@
+#28th September 2026
+
+🐍 Python Practice
+Use the following DataFrame:
+import pandas as pd
+
+data = {
+    "video_id": [
+        "V01", "V02", "V03", "V04", "V05",
+        "V06", "V07", "V08", "V09", "V10"
+    ],
+    "sign": [
+        "HELLO", "HELLO", "HELLO", "HELP", "HELP",
+        "HELP", "YES", "YES", "NO", "NO"
+    ],
+    "signer_id": [
+        "S01", "S01", "S02", "S01", "S02",
+        "S03", "S02", "S03", "S03", "S03"
+    ],
+    "environment": [
+        "indoor", "indoor", "outdoor", "outdoor", "outdoor",
+        "outdoor", "indoor", "indoor", "indoor", "outdoor"
+    ],
+    "quality_score": [5, 4, 5, 2, 3, 2, 5, 4, 5, 4]
+}
+
+df = pd.DataFrame(data)
+
+Task 1 — Basic aggregation
+Calculate:
+videos_per_sign
+videos_per_signer
+videos_per_environment
+Use Pandas operations you’ve already learned.
+
+Task 2 — Average quality
+Calculate:
+average_quality_by_sign
+It should show the average quality_score for each sign.
+
+Task 3 — Two-variable analysis
+Calculate:
+videos_by_sign_environment
+using:
+groupby(["sign", "environment"])
+
+Task 4 — Three useful questions
+Use your DataFrame to answer:
+Which sign has the most videos?
+Which signer contributed the most videos?
+Which environment has the most recordings?
+Then explain one thing these numbers do not tell you.
+
+Task 5 — Assertions
+Write at least four meaningful assertions.
+For example, you might test:
+total number of rows
+expected number of unique signs
+expected number of unique signers
+that every quality score falls within the expected range
+But don’t copy those blindly. Choose assertions that actually test properties of this dataset.
+
+PYTHON ANSWER 
+import pandas as pd
+data = {
+     "video_id": [
+         "V01", "V02", "V03", "V04", "V05",
+         "V06", "V07", "V08", "V09", "V10"
+     ],
+     "sign": [
+         "HELLO", "HELLO", "HELLO", "HELP", "HELP",
+         "HELP", "YES", "YES", "NO", "NO"
+     ],
+     "signer_id": [
+         "S01", "S01", "S02", "S01", "S02",
+         "S03", "S02", "S03", "S03", "S03"
+     ],
+     "environment": [
+         "indoor", "indoor", "outdoor", "outdoor", "outdoor",
+         "outdoor", "indoor", "indoor", "indoor", "outdoor"
+     ],
+     "quality_score": [5, 4, 5, 2, 3, 2, 5, 4, 5, 4]
+ }
+df = pd.DataFrame(data)
+# Task 1 — Basic aggregation
+ videos_per_sign = df["sign"].value_counts()
+ videos_per_signer = df["signer_id"].value_counts()
+ videos_per_environment = df["environment"].value_counts()
+# Task 2 — Average quality
+ average_quality_by_sign = df.groupby("sign")["quality_score"].mean()
+# Task 3 — Two-variable analysis
+ videos_by_sign_environment = df.groupby(["sign", "environment"]).size()
+4
+ * Which sign has the most videos?
+    HELLO and HELP are tied for the most videos (3 videos each).
+  * Which signer contributed the most videos?
+    S03 contributed the most videos (4 videos).
+  * Which environment has the most recordings?
+    Indoor and Outdoor are tied (5 videos each).
+They do not reveal representation gaps. For example, looking at environment counts alone makes the dataset seem balanced (5 indoor vs. 5 outdoor), but it hides the fact that HELP was recorded 100% outdoors and YES was recorded 100% indoors.
+Task 5
+ # 1. Test total number of rows in the dataset
+ assert len(df) == 10, "Dataset should contain exactly 10 rows"
+# 2. Test expected number of unique signs
+ assert df["sign"].nunique() == 4, "Expected exactly 4 unique signs"
+# 3. Test expected number of unique signers
+ assert df["signer_id"].nunique() == 3, "Expected exactly 3 unique signers"
+# 4. Test that all quality scores fall within the expected range (1 to 5)
+ assert df["quality_score"].between(1, 5).all(), "All quality scores must be between 1 and 5"
+

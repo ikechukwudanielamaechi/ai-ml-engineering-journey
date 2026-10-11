@@ -1,0 +1,120 @@
+#4th October 2026
+
+
+🐍 Python Practice
+We’re still using only your established Pandas skills.
+Use:
+import pandas as pd
+
+data = {
+    "video_id": ["V01", "V02", "V03", "V04", "V05",
+                 "V06", "V07", "V08", "V09", "V10"],
+    "sign": ["HELLO", "HELLO", "HELP", "HELP", "HELP",
+             "YES", "YES", "NO", "NO", "MEDICINE"],
+    "signer": ["S01", "S02", "S01", "S03", "S03",
+               "S02", "S04", "S01", "S04", "S02"],
+    "environment": ["indoor", "indoor", "outdoor", "outdoor", "outdoor",
+                    "indoor", "indoor", "outdoor", "indoor", "indoor"],
+    "quality": [5, 4, 2, 3, 2, 5, 4, 5, 5, 4]
+}
+
+df = pd.DataFrame(data)
+
+Task 1 — Sign × Environment
+Run:
+df.groupby(["sign", "environment"]).size()
+Write down the output and explain what it means.
+
+Task 2 — Sign × Signer
+Run:
+df.groupby(["sign", "signer"]).size()
+Look carefully at the output.
+Which signers appear with HELP?
+Which signers appear with YES?
+
+Task 3 — Quality by environment
+Run:
+df.groupby("environment")["quality"].mean()
+Answer:
+Which environment has the higher average quality?
+What does this tell you?
+What doesn’t it tell you?
+That last question is important.
+
+Task 4 — Quality by sign and environment
+Now extend your existing groupby() knowledge:
+df.groupby(["sign", "environment"])["quality"].mean()
+Look at the resulting groups.
+What patterns do you notice?
+Are there any combinations for which you cannot make a meaningful comparison because there are no observations?
+
+Task 5 — One visualization
+Create a bar chart showing the number of observations for each sign.
+Then write:
+One thing the chart reveals and one thing the chart cannot reveal.
+This reinforces an important lesson from Day 60:
+A visualization can reveal a pattern without explaining its cause.
+
+PYTHON ANSWER
+
+ Task 1
+ Output:
+ sign      environment
+ HELLO     indoor         2
+ HELP      outdoor        3
+ MEDICINE  indoor         1
+ NO        indoor         1
+           outdoor        1
+ YES       indoor         2
+ dtype: int64
+Meaning:
+ This output breaks down the frequency of each sign across environments. It reveals extreme conditional imbalance—HELP is exclusively recorded outdoors (3 times), while HELLO, YES, and MEDICINE are recorded strictly indoors. Only NO has a balanced mix (1 indoor, 1 outdoor).
+Task 2
+ Output:
+ sign      signer
+ HELLO     S01       1
+           S02       1
+ HELP      S01       1
+           S03       2
+ MEDICINE  S02       1
+ NO        S01       1
+           S04       1
+ YES       S02       1
+           S04       1
+ dtype: int64
+ * Which signers appear with HELP? S01 (1 video) and S03 (2 videos).
+  * Which signers appear with YES? S02 (1 video) and S04 (1 video).
+ Task 3 — Quality by Environment
+ Output:
+ environment
+ indoor     4.500000
+ outdoor    3.250000
+ Name: quality, dtype: float64
+ * Which environment has the higher average quality? Indoor (average quality score of 4.5 vs. 3.25 for outdoor).
+  * What does this tell you? Video recordings taken in indoor environments generally achieve higher quality scores than those taken outdoors.
+  * What doesn't it tell you? It doesn't tell you why outdoor quality is lower—whether it is due to natural lighting/glare, or simply because lower-quality signs like HELP happened to be filmed outdoors.
+Task 4 — Quality by Sign and Environment
+ Output:
+ sign      environment
+ HELLO     indoor         4.5
+ HELP      outdoor        2.333333
+ MEDICINE  indoor         4.0
+ NO        indoor         5.0
+           outdoor        5.0
+ YES       indoor         4.5
+ Name: quality, dtype: float64
+ * Patterns noticed: The outdoor quality drop is primarily driven by HELP (2.33). Meanwhile, NO maintains a perfect quality score of 5.0 in both indoor and outdoor settings.
+  * Missing combinations: You cannot make cross-environment quality comparisons for HELLO, HELP, YES, or MEDICINE because they only exist in one environment (e.g., there are zero indoor HELP videos and zero outdoor HELLO, YES, or MEDICINE videos).
+Task 5 — One Visualization
+ Code:
+ import matplotlib.pyplot as plt
+df["sign"].value_counts().plot(kind="bar")
+ plt.xlabel("Sign")
+ plt.ylabel("Number of Observations")
+ plt.title("Observation Count per Sign Class")
+ plt.show()
+ * One thing the chart reveals: It clearly reveals class counts at a glance (e.g., HELP has the most total observations with 3, while MEDICINE has the fewest with 1).
+  * One thing the chart cannot reveal: It cannot reveal the underlying environmental or signer split within those counts (e.g., that all 3 HELP videos were recorded outdoors).
+
+
+

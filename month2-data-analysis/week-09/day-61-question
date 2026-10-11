@@ -1,0 +1,120 @@
+#2nd October 2026
+
+🐍 Python Practice
+We’re staying within your demonstrated level: Pandas + basic Python + NumPy knowledge.
+Today, work with this dataset:
+import pandas as pd
+
+data = {
+    "video_id": ["V01", "V02", "V03", "V04", "V05",
+                 "V06", "V07", "V08", "V09", "V10"],
+    "sign": ["HELLO", "HELLO", "HELP", "HELP", "HELP",
+             "YES", "YES", "NO", "NO", "MEDICINE"],
+    "signer": ["S01", "S02", "S01", "S03", "S03",
+               "S02", "S04", "S01", "S04", "S02"],
+    "environment": ["indoor", "indoor", "outdoor", "outdoor", "outdoor",
+                    "indoor", "indoor", "outdoor", "indoor", "indoor"],
+    "quality": [5, 4, 2, 3, 2, 5, 4, 5, 5, 4]
+}
+
+df = pd.DataFrame(data)
+Task 1 — Inspect
+Run:
+df.shape
+df.columns
+df.dtypes
+df.head()
+Write down what each tells you.
+
+Task 2 — Class distribution
+Use:
+df["sign"].value_counts()
+Identify:
+most frequent sign
+least frequent sign
+whether the classes are balanced
+
+Task 3 — Signer distribution
+Use:
+df["signer"].value_counts()
+Then explain what this tells you about the dataset.
+
+Task 4 — Environment distribution
+Use:
+df["environment"].value_counts()
+Then compare this with the sign distribution.
+
+Task 5 — Grouped analysis
+Use the Pandas groupby() knowledge you’ve already learned.
+Calculate the average quality score for each sign:
+df.groupby("sign")["quality"].mean()
+Then answer:
+Which sign has the lowest average quality score?
+And:
+What hypothesis could you form about why?
+Remember: hypothesis, not conclusion.
+
+PYTHON CODE
+Task 1 — Inspect
+ Output Analysis
+  * df.shape
+    * Result: (10, 5)
+    * Explanation: Returns the dimensions of the DataFrame. It shows there are 10 rows (records) and 5 columns.
+  * df.columns
+    * Result: Index(['video_id', 'sign', 'signer', 'environment', 'quality'], dtype='object')
+    * Explanation: Lists the names of all the columns present in the dataset.
+  * df.dtypes
+    * Result:
+      video_id       object
+ sign           object
+ signer         object
+ environment    object
+ quality         int64
+   * Explanation: Displays the data type of each column. video_id, sign, signer, and environment are text/strings (object), while quality is an integer (int64).
+  * df.head()
+    * Result: Displays the first 5 rows of the DataFrame (from V01 to V05).
+    * Explanation: Provides a quick preview of the actual data entries to inspect formatting and initial values.
+ Task 2 — Class Distribution
+ Output of df["sign"].value_counts():
+ HELP        3
+ HELLO       2
+ YES         2
+ NO          2
+ MEDICINE    1
+ Name: sign, dtype: int64
+Answers:
+  * Most frequent sign: HELP (appears 3 times).
+  * Least frequent sign: MEDICINE (appears 1 time).
+  * Are the classes balanced? No, the classes are imbalanced. HELP has 3 samples, HELLO, YES, and NO have 2 samples each, while MEDICINE only has 1 sample.
+ Task 3 — Signer Distribution
+ Output of df["signer"].value_counts():
+ S01    3
+ S02    3
+ S03    2
+ S04    2
+ Name: signer, dtype: int64
+Insight:
+ This shows that data collection is spread across 4 distinct signers (S01, S02, S03, S04), with S01 and S02 contributing slightly more videos (3 each) than S03 and S04 (2 each). The overall signer distribution is relatively well-distributed, though small in sample size.
+ Task 4 — Environment Distribution
+ Output of df["environment"].value_counts():
+ indoor     7
+ outdoor    3
+ Name: environment, dtype: int64
+Comparison with Sign Distribution:
+  * The environment feature is heavily skewed towards indoor (70% indoor vs. 30% outdoor).
+  * Noticeably, all 3 occurrences of the HELP sign (from Task 2) were recorded in an outdoor environment, whereas all other signs (HELLO, YES, NO, MEDICINE) were recorded mostly or entirely indoor.
+ Task 5 — Grouped Analysis
+ Output of df.groupby("sign")["quality"].mean():
+ sign
+ HELLO       4.500000
+ HELP        2.333333
+ MEDICINE    4.000000
+ NO          5.000000
+ YES         4.500000
+ Name: quality, dtype: float64
+Answers:
+  * Which sign has the lowest average quality score?
+    * HELP (with an average score of approximately 2.33).
+  * What hypothesis could you form about why?
+    * Hypothesis: The lower quality scores for HELP may be caused by environmental factors, as all HELP videos were recorded outdoors (where lighting variations, background clutter, or weather conditions might reduce video quality), whereas signs recorded indoors consistently received higher quality ratings
+

@@ -1,0 +1,117 @@
+#1st October 2026
+
+
+Python Practice 🐍
+We’re going to introduce plotting today rather than assuming you’ve already learned it.
+Use:
+import pandas as pd
+import matplotlib.pyplot as plt
+Then create:
+df = pd.DataFrame({
+    "video_id": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+    "sign": ["HELLO", "HELLO", "HELP", "HELP", "HELP", "YES", "YES", "NO"],
+    "environment": ["indoor", "outdoor", "outdoor", "outdoor",
+                    "indoor", "indoor", "indoor", "outdoor"],
+    "quality": [5, 4, 3, 2, 4, 3, 5, 5]
+})
+Task 1 — Sign distribution
+Create a bar chart showing the number of videos for each sign.
+Use concepts you’ve already learned:
+df["sign"].value_counts()
+Then turn that into a bar chart.
+Add:
+x-axis label
+y-axis label
+title
+plt.show()
+
+Task 2 — Quality distribution
+Create a histogram showing the distribution of quality.
+Add:
+x-axis label
+y-axis label
+title
+plt.show()
+
+Task 3 — Average quality by sign
+Use your existing knowledge of groupby():
+df.groupby("sign")["quality"].mean()
+Turn the result into a bar chart.
+Add:
+x-axis label
+y-axis label
+title
+plt.show()
+
+Task 4 — Research observation
+After looking at your three graphs, write three observations.
+Use this structure:
+Observation 1:
+Observation 2:
+Observation 3:
+At least one observation must be something that would not be as immediately obvious from simply looking at the raw DataFrame.
+Don’t give explanations yet. Just observations.
+
+
+PYTHON CODE ANSWERS
+import matplotlib.pyplot as plt
+ import pandas as pd
+df = pd.DataFrame({
+     "video_id": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+     "sign": ["HELLO", "HELLO", "HELP", "HELP", "HELP", "YES", "YES", "NO"],
+     "environment": ["indoor", "outdoor", "outdoor", "outdoor",
+                     "indoor", "indoor", "indoor", "outdoor"],
+     "quality": [5, 4, 3, 2, 4, 3, 5, 5]
+ })
+# Task 1 — Sign distribution
+ df["sign"].value_counts().plot(kind="bar")
+ plt.xlabel("Sign")
+ plt.ylabel("Number of Videos")
+ plt.title("Distribution of Videos per Sign")
+ plt.show()
+# Task 2 — Quality distribution
+ df["quality"].plot(kind="hist", bins=5, edgecolor="black")
+ plt.xlabel("Quality Score")
+ plt.ylabel("Frequency")
+ plt.title("Distribution of Video Quality Scores")
+ plt.show()
+# Task 3 — Average quality by sign
+ df.groupby("sign")["quality"].mean().plot(kind="bar")
+ plt.xlabel("Sign")
+ plt.ylabel("Average Quality Score")
+ plt.title("Average Video Quality Score by Sign")
+ plt.show()
+Here are the Python code scripts and research observations for Tasks 1 through 4:
+ import matplotlib.pyplot as plt
+ import pandas as pd
+df = pd.DataFrame({
+     "video_id": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08"],
+     "sign": ["HELLO", "HELLO", "HELP", "HELP", "HELP", "YES", "YES", "NO"],
+     "environment": ["indoor", "outdoor", "outdoor", "outdoor",
+                     "indoor", "indoor", "indoor", "outdoor"],
+     "quality": [5, 4, 3, 2, 4, 3, 5, 5]
+ })
+# Task 1 — Sign distribution
+ df["sign"].value_counts().plot(kind="bar")
+ plt.xlabel("Sign")
+ plt.ylabel("Number of Videos")
+ plt.title("Distribution of Videos per Sign")
+ plt.show()
+# Task 2 — Quality distribution
+ df["quality"].plot(kind="hist", bins=5, edgecolor="black")
+ plt.xlabel("Quality Score")
+ plt.ylabel("Frequency")
+ plt.title("Distribution of Video Quality Scores")
+ plt.show()
+# Task 3 — Average quality by sign
+ df.groupby("sign")["quality"].mean().plot(kind="bar")
+ plt.xlabel("Sign")
+ plt.ylabel("Average Quality Score")
+ plt.title("Average Video Quality Score by Sign")
+ plt.show()
+Task 4 — Research Observation
+  * Observation 1: The sign "HELP" is the most frequent category in the dataset with 3 videos, while "NO" is the least frequent with only 1 video.
+  * Observation 2: Video quality scores span from 2 to 5, with high-quality videos (scores 4 and 5) accounting for the majority of the dataset.
+  * Observation 3: "HELP" has the lowest average quality score (3.0) among all signs, whereas "NO" achieves the highest average quality score (5.0).
+
+

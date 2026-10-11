@@ -1,0 +1,49 @@
+#30th September 2026
+
+Python Practice 🐍
+Stay strictly within the Pandas/NumPy level you’ve already covered.
+Assume:
+import pandas as pd
+and:
+df = pd.DataFrame({
+    "video_id": ["V01", "V02", "V03", "V04", "V05"],
+    "sign": ["HELLO", "HELP", "HELP", "YES", "NO"],
+    "environment": ["indoor", "outdoor", None, "indoor", None],
+    "quality": [5, 4, 3, None, 5]
+})
+Task 1
+Write code to count missing values in environment.
+Task 2
+Write code to count missing values in every column.
+Task 3
+Create a DataFrame containing only rows where environment is missing.
+Task 4
+Create a DataFrame containing only rows where quality is missing.
+Task 5 — Audit challenge
+Write assertions for these requirements:
+1. The dataset contains 5 rows.
+2. There are exactly 2 missing environment values.
+3. There is exactly 1 missing quality value.
+4. video_id contains no missing values.
+Don’t use methods we haven’t explicitly covered yet.
+
+PYTHON CODE
+# Task 1 — Count missing values in environment
+ missing_env_count = df["environment"].isna().sum()
+# Task 2 — Count missing values in every column
+ missing_per_column = df.isna().sum()
+# Task 3 — DataFrame where environment is missing
+ missing_env_df = df[df["environment"].isna()]
+# Task 4 — DataFrame where quality is missing
+ missing_quality_df = df[df["quality"].isna()]
+# Task 5 — Assertion
+# 1. The dataset contains 5 rows
+ assert len(df) == 5, "Dataset must contain exactly 5 rows"
+# 2. There are exactly 2 missing environment values
+ assert df["environment"].isna().sum() == 2, "Expected exactly 2 missing environment values"
+# 3. There is exactly 1 missing quality value
+ assert df["quality"].isna().sum() == 1, "Expected exactly 1 missing quality value"
+# 4. video_id contains no missing values
+ assert df["video_id"].isna().sum() == 0, "video_id column must not have any missing values"
+
+
