@@ -25,9 +25,9 @@ Reserved for NumPy/Pandas/Kaggle work, starting once I complete CS50P.
 |---|---|
 | ML fundamentals (evaluation, metrics, data quality, splitting, reproducibility) | ✅ Strong conceptual foundation |
 | Python (CS50P) | 🟢 Completed |
-| NumPy / Pandas | 🟡 Ongoing |
-| Git/GitHub | 🟡 In progress (this repo) |
-| Classical ML implementation | ⬜ Month 3 of roadmap |
+| NumPy / Pandas | 🟢 Completed |
+| Git/GitHub | (this repo)🟢 Completed |
+| Classical ML implementation | 🟡 In progress  Month 3 of roadmap |
 | Computer vision (MediaPipe, CNNs) | ⬜ Month 5 |
 | Project Bridge — first shipped project | ⬜ Month 6 |
 
