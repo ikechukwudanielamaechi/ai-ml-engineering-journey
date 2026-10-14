@@ -54,7 +54,7 @@ Visual Limitations: Relying exclusively on high-level visual plots can mask unde
 7. How to Run the Notebook
 To reproduce this analysis locally, follow these steps:
 Clone the Repository:
-git clone https://github.com/your-username/al-ml-engineering-journey.git
+git clone https://github.com/ikechukwudanielamaechi/al-ml-engineering-journey.git
 cd al-ml-engineering-journey/wine_quality
 
 
